@@ -6,7 +6,6 @@ function test_input($data)
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
-    
 }
 
 // Initialize variables to store form data
@@ -20,7 +19,7 @@ ini_set('display_errors', '1');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Debugging: Dump the contents of $_POST
     var_dump($_POST);
-    
+
     // Retrieve data from the form
     $name = test_input($_POST["name"]);
     $icpassport = test_input($_POST["icpassport"]);
@@ -55,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>DEFERMENT OF ACADEMIC SEMESTER</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .error {color: red;}
         /* Add spacing between form fields */
         td {
             padding-bottom: 10px;
@@ -66,8 +64,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-bottom: 1px solid #ddd;
             padding: 5px 0;
         }
-         /* Adjust margin for the form to avoid overlap with the fixed footer */
-         .academic-form {
+
+        /* Adjust margin for the form to avoid overlap with the fixed footer */
+        .academic-form {
             margin-bottom: 30px;
         }
     </style>
@@ -81,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <nav>
         <ul>
-            <li><a href="http://127.0.0.1:5500/profile/profile.html">My Profile</a></li>
+            <li><a href="http://127.0.0.1:5500/profile/index.html">My Profile</a></li>
             <li><a href="http://localhost/AssignmentICT600/form/form.php">Form</a></li>
         </ul>
     </nav>
@@ -104,10 +103,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h3>Section I (To be filled by student in CAPITAL LETTERS)</h3>
     </header>
 
-    <!-- Section I form -->
+    <!-- Combined form for Section I and Section II -->
     <form action="submission.php" method="post" class="academic-form">
         <p><span class="error">* required field</span></p>
         <table>
+            <!-- Section I fields -->
             <tr>
                 <td>
                     <label for="name">Name :</label>
@@ -133,7 +133,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td>
                     <label for="facultyCode">Faculty Code :</label>
                     <select id="facultyCode" name="facultyCode" required>
-                    <span class="error">* </span>
                         <option value="AC12">AC12 - Faculty of Accountancy</option>
                         <option value="AP22">AP22 - College of Built Environment</option>
                         <option value="AS20">AS20 - Faculty of Applied Sciences</option>
@@ -178,7 +177,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      
         </select>
     </td>
-
     <tr>
     <td>
         <label for="semester">Semester :</label>
@@ -195,8 +193,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select>
     </td>
 </tr>
-
-
 <tr>
     <td>
         <label>Gender :</label>
@@ -323,67 +319,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </td>
     </tr>
            
+
+            <!-- Section II fields -->
+            <tr>
+                <td>
+                    <label for="previousDeferment">Number of previous Deferment of Academic Semester (TG) (if any) :</label>
+                    <input type="text" id="previousDeferment" name="previousDeferment" pattern="[0-9]+" title="Please enter a valid number" required>
+                    <span class="error">* </span>
+                    <label for="previousDeferment">Time</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="display: flex; align-items: center;">
+                    <label for="reasons">Reasons for Application of Deferment (TG) (please attach supporting documents) :</label>
+                    <textarea id="reasons" name="reasons" rows="5" cols="50" style="margin-left: 10px;"
+                        pattern="^[A-Za-z0-9\s.,!?()-]+$" title="Please enter valid reasons" required></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="register">I will re-register for semester :</label>
+                    <select id="register" name="register" required>
+                        <option value="MARCH">MARCH</option>
+                        <option value="SEPTEMBER">SEPTEMBER</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="year">Year :</label>
+                    <input type="text" id="year" name="year" placeholder="YYYY" pattern="\d{4}" title="Enter a valid 4-digit year" required>
+                    <span class="error">* </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="date">Date : </label>
+                    <input type="date" id="date" name="date" placeholder="dd/mm/yyyy" required>
+                    <span class="error">* </span>
+                </td>
+            </tr>
+
+            <!-- Continue adding your form fields for Section II -->
+
+            <tr>
+                <td colspan="0.6" style="text-align: left;">
+                    <input type="submit" value="Submit">
+                </td>
+            </tr>
         </table>
-    </form>
-
-    <header>
-        <h3>Section II</h3>
-    </header>
-    <form action="submission.php" method="post" class="academic-form">
-        <p><span class="error">* required field</span></p>
-        <table>
-        <tr>
-    <td>
-        <label for="previousDeferment">Number of previous Deferment of Academic Semester (TG) (if any) :</label>
-        <input type="text" id="previousDeferment" name="previousDeferment" pattern="[0-9]+" title="Please enter a valid number" required>
-        <span class="error">* </span>
-        <label for="previousDeferment">Time</label>
-    </td>
-</tr>
-                             
-<tr>
-    <td style="display: flex; align-items: center;">
-        <label for="reasons">Reasons for Application of Deferment (TG) (please attach supporting documents) :</label>
-        <textarea id="reasons" name="reasons" rows="5" cols="50" style="margin-left: 10px;" pattern="^[A-Za-z0-9\s.,!?()-]+$" title="Please enter valid reasons" required></textarea>
-    </td>
-</tr>
-             
-                
-            
-<tr>
-    <td>
-        <label for="register">I will re-register for semester :</label>
-        <select id="register" name="register" required>
-        <span class="error">* </span>
-            <option value="MARCH">MARCH</option>
-            <option value="SEPTEMBER">SEPTEMBER</option>
-        </select>
-    </td>
-</tr>
-
-            
-<tr>
-    <td>
-        <label for="year">Year :</label>
-        <input type="text" id="year" name="year" placeholder="YYYY" pattern="\d{4}" title="Enter a valid 4-digit year" required>
-        <span class="error">* </span>
-    </td>
-</tr>
-
-<tr>
-    <td>
-<label for="date">Date : </label>
-            <input type="date" id="date" name="date" placeholder="dd/mm/yyyy" required>
-            <span class="error">* </span>
-    </td>
-    </tr>
-        
-        <tr>
-            <td colspan="0.6" style="text-align: left;">
-                <input type="submit" value="Submit">
-            </td>
-        </tr>
-    </table>
     </form>
 
     <footer>

@@ -1,47 +1,37 @@
 <?php
-// Function to sanitize and validate input data
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-// Initialize variables to store form data
-$name = $icpassport = $studentId = $facultyCode = $programmeCode = $semester = $gender = $campus = $levelOfStudy = $modeOfStudy = $mailingaddress = $changeOfAddress = $postcode = $telno = $phoneno = $email = $previousDeferment = $reasons = $register = $year = $date = "";
-
-// Enable error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
-// Check if the form has been submitted
+// Check if the form data has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Debugging: Dump the contents of $_POST
-    var_dump($_POST);
+    // Retrieve and display the data
+    echo "<h2>Submitted Form Data</h2>";
 
-    // Retrieve data from the form
-    $name = test_input($_POST["name"]);
-    $icpassport = test_input($_POST["icpassport"]);
-    $studentId = test_input($_POST["studentId"]);
-    $facultyCode = test_input($_POST["facultyCode"]);
-    $programmeCode = test_input($_POST["programmeCode"]);
-    $semester = test_input($_POST["semester"]);
-    $gender = test_input($_POST["gender"]);
-    $campus = test_input($_POST["campus"]);
-    $levelOfStudy = test_input($_POST["levelOfStudy"]);
-    $modeOfStudy = test_input($_POST["modeOfStudy"]);
-    $mailingaddress = test_input($_POST["mailingaddress"]);
-    $changeOfAddress = isset($_POST["changeOfAddress"]) ? "yes" : "no";
-    $postcode = test_input($_POST["postcode"]);
-    $telno = test_input($_POST["telno"]);
-    $phoneno = test_input($_POST["phoneno"]);
-    $email = test_input($_POST["email"]);
-    $previousDeferment = test_input($_POST["previousDeferment"]);
-    $reasons = test_input($_POST["reasons"]);
-    $register = test_input($_POST["register"]);
-    $year = test_input($_POST["year"]);
-    $date = test_input($_POST["date"]);
+    echo "<h3>Section I</h3>";
+    echo "Name: " . htmlspecialchars($_POST["name"]) . "<br>";
+    echo "IC No/Passport No.: " . htmlspecialchars($_POST["icpassport"]) . "<br>";
+    echo "Student ID No.: " . htmlspecialchars($_POST["studentId"]) . "<br>";
+    echo "Faculty Code: " . htmlspecialchars($_POST["facultyCode"]) . "<br>";
+    echo "Programme Code: " . htmlspecialchars($_POST["programmeCode"]) . "<br>";
+    echo "Semester: " . htmlspecialchars($_POST["semester"]) . "<br>";
+    echo "Gender: " . htmlspecialchars($_POST["gender"]) . "<br>";
+    echo "Campus: " . htmlspecialchars($_POST["campus"]) . "<br>";
+    echo "Level of Study: " . htmlspecialchars($_POST["levelOfStudy"]) . "<br>";
+    echo "Mode of Study: " . htmlspecialchars($_POST["modeOfStudy"]) . "<br>";
+    echo "Mailing Address: " . htmlspecialchars($_POST["mailingaddress"]) . "<br>";
+    echo "Change of Address: " . (isset($_POST["changeOfAddress"]) ? "Yes" : "No") . "<br>";
+    echo "Postcode: " . htmlspecialchars($_POST["postcode"]) . "<br>";
+    echo "Tel No.: " . htmlspecialchars($_POST["telno"]) . "<br>";
+    echo "Mobile Phone No.: " . htmlspecialchars($_POST["phoneno"]) . "<br>";
+    echo "E-mail: " . htmlspecialchars($_POST["email"]) . "<br>";
+
+    echo "<h3>Section II</h3>";
+    echo "Number of previous Deferment: " . htmlspecialchars($_POST["previousDeferment"]) . " Time(s)<br>";
+    echo "Reasons for Application of Deferment: " . htmlspecialchars($_POST["reasons"]) . "<br>";
+    echo "Re-register for semester: " . htmlspecialchars($_POST["register"]) . " " . htmlspecialchars($_POST["year"]) . "<br>";
+    echo "Date: " . htmlspecialchars($_POST["date"]) . "<br>";
+
+    // Add more code to display additional fields from Section II if needed
+} else {
+    // If the form data has not been submitted, redirect to the form page
+    header("Location: form.php");
+    exit();
 }
 ?>
-
